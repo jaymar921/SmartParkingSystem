@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Important\Programming Langs\C#\SmartParkingSystemAPI\SmartParkingSystemAPI\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2022-12-18T07:26:06.1768704Z;True|2022-12-18T15:25:31.9428541+08:00;True|2022-12-18T15:14:14.4467454+08:00;True|2022-12-18T15:13:47.8837076+08:00;True|2022-12-18T15:01:15.9874187+08:00;True|2022-12-18T14:59:49.3826633+08:00;True|2022-12-18T14:50:56.3366101+08:00;True|2022-12-18T14:49:56.3530751+08:00;True|2022-12-18T14:45:41.9588301+08:00;True|2022-12-18T14:17:45.0327823+08:00;True|2022-12-18T13:05:12.5844223+08:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

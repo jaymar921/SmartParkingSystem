@@ -1,0 +1,7 @@
+D:\Important\Programming Langs\C#\SmartParkingSystemAPI\SmartParkingSystemAPI\obj\Release\net6.0\PubTmp\Out\SmartParkingSystemAPI.exe
+D:\Important\Programming Langs\C#\SmartParkingSystemAPI\SmartParkingSystemAPI\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+D:\Important\Programming Langs\C#\SmartParkingSystemAPI\SmartParkingSystemAPI\obj\Release\net6.0\PubTmp\Out\appsettings.json
+D:\Important\Programming Langs\C#\SmartParkingSystemAPI\SmartParkingSystemAPI\obj\Release\net6.0\PubTmp\Out\SmartParkingSystemAPI.dll
+D:\Important\Programming Langs\C#\SmartParkingSystemAPI\SmartParkingSystemAPI\obj\Release\net6.0\PubTmp\Out\SmartParkingSystemAPI.deps.json
+D:\Important\Programming Langs\C#\SmartParkingSystemAPI\SmartParkingSystemAPI\obj\Release\net6.0\PubTmp\Out\SmartParkingSystemAPI.runtimeconfig.json
+D:\Important\Programming Langs\C#\SmartParkingSystemAPI\SmartParkingSystemAPI\obj\Release\net6.0\PubTmp\Out\SmartParkingSystemAPI.pdb

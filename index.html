@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Parking System V1.0</title>
+    <link rel="stylesheet" href="./SmartParkingSystemAPI_Web/style.css">
+    <link rel="stylesheet" href="./SmartParkingSystemAPI_Web/bootsrap/bootstrap-grid.css">
+    <script defer src="./SmartParkingSystemAPI_Web/script.js"></script>
+    
+</head>
+<body>
+    <div class="banner">
+        <h1>Smart Parking System</h1>
+        <h3>V1.0 - Developed by Jayharron Abejar</h3>
+    </div>
+    <div class="connect_bar">
+        <input type="text" id="connect_api" placeholder="asp.net api url">
+        <button style="cursor: pointer;" onclick="connectAPI()">Connect</button><br>
+        <button class="status" id="api-status">STATUS</button>
+    </div>
+
+    <div id="card-rows" class="row">
+        <!-- CHILD NODES GO HERE -->
+    </div>
+
+    <div class="update-modal" id="update-modal" style="display: none;">
+        <div class="card">
+            <label for="user-name">Name</label><input id="user-name">
+            <label>UID</label><input id="user-uid" disabled>
+            <label for="user-balance">Balance</label><input id="user-balance"><br><br>
+            <button style="font-size: 15px; padding: 2px; cursor: pointer" onclick="updateCard()">UPDATE</button>
+            <button style="font-size: 15px; cursor: pointer" onclick="deleteCard()">🗑️</button>
+            <button style="font-size: 15px; cursor: pointer" onclick="closeModal()">❌</button>
+        </div>
+    </div>
+</body>
+</html>
