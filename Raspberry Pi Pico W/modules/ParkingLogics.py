@@ -177,6 +177,10 @@ def updateCards(REGISTERED_CARDS):
                         REGISTERED_CARD.balance = CARD.balance
                         print(f"changed balance {CARD.balance} - {CARD.name}")
                         break
+                    if str(REGISTERED_CARD.name) != str(CARD.name):
+                        print(f"changed name from {REGISTERED_CARD.name} - {CARD.name}")
+                        REGISTERED_CARD.name = CARD.name
+                        break
             if not REGISTERED:
                 print(f"registered {CARD.uid} - {CARD.name}")
                 print(f"card length {len(REGISTERED_CARDS)}")
