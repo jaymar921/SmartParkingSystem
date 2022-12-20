@@ -6,6 +6,8 @@ import utime
 import _thread
 from modules.gpio_lcd import GpioLcd
 from modules.CLASSES import Card
+import modules.Internet as Internet
+import random
 
 
 rfid_reader = MFRC522(spi_id=0,sck=2,miso=4,mosi=3,cs=1,rst=0)
@@ -18,9 +20,9 @@ rfid_reader = MFRC522(spi_id=0,sck=2,miso=4,mosi=3,cs=1,rst=0)
 # GLOBAL VARIABLES
 SYSTEM_TIME = '0'
 TAPPED: bool = False
-REGISTERED_CARDS: list = [Card('1068049966', 23), Card('3118564713', 50.25)]
 PARKED: list = []
 RELOAD: bool = False
+REGISTERED_CARDS: list = []
 
 def clock():
     global SYSTEM_TIME
@@ -62,12 +64,25 @@ def clock():
 def reader():
     global SYSTEM_TIME
     global TAPPED
-    global REGISTERED_CARDS
     global RELOAD
+    global REGISTERED_CARDS
+    ParkingLogics.displayLCD("Connecting to","the internet")
+    
+    while True:
+        if not Internet.Connect():
+            TAPPED = True
+            ParkingLogics.displayLCD("No Internet","retrying...")
+            utime.sleep(1)
+            continue
+        else:
+            ParkingLogics.updateCards(REGISTERED_CARDS)
+            break
     while True:
         #bluetooth_listen()
         rfid_reader.init()
         
+        if random.randint(0,200) < 10:
+            ParkingLogics.updateCards(REGISTERED_CARDS)
         
         if TAPPED:
             continue
@@ -77,22 +92,9 @@ def reader():
         if cardId == '':
             continue
         
-        if RELOAD:
-            ParkingLogics.reloadCard(REGISTERED_CARDS, cardId)
-            RELOAD = False
-            TAPPED = True
-            continue
-        
-        if '63914259' == cardId:
-            RELOAD = True
-            ParkingLogics.displayLCD("Tap a card to","reload...")
-            TAPPED = True
-            continue
-            
-        
         print("CARD ID: "+str(cardId))
         TAPPED = True
-        ParkingLogics.onTap(PARKED, REGISTERED_CARDS, SYSTEM_TIME, cardId)
+        ParkingLogics.onTap(REGISTERED_CARDS, PARKED, SYSTEM_TIME, cardId)
         
                 
 

@@ -1,6 +1,7 @@
 from machine import Pin, PWM
 from modules.CLASSES import Card
-from gpio_lcd import GpioLcd
+from modules.gpio_lcd import GpioLcd
+import modules.Internet as Internet
 import utime
 
 lcd = GpioLcd(rs_pin = Pin(8),
@@ -21,7 +22,9 @@ servo.freq(50)
 servo.duty_ns(MID)
 
 
-def onTap(PARKED, REGISTERED_CARDS, time: str,uid: str):
+
+def onTap(REGISTERED_CARDS, PARKED, time: str,uid: str):
+    
     for CARD in REGISTERED_CARDS:
         if CARD.uid == uid:
             # Check if the car is already parked
@@ -40,7 +43,8 @@ def onTap(PARKED, REGISTERED_CARDS, time: str,uid: str):
                         CARD.time_parked = -1
                     else:
                         PARKED.remove(CARD)
-                        CARD.balance = CARD.balance - payment
+                        #CARD.balance = CARD.balance - payment
+                        deductCardBalance(REGISTERED_CARDS, CARD, payment)
                         displayLCD(f"Paid P{payment}","Balance: P"+str(CARD.balance))
                         print('OFF PARKING AT '+time)
                         openGate()
@@ -62,7 +66,8 @@ def onTap(PARKED, REGISTERED_CARDS, time: str,uid: str):
                         CARD.time_parked = -1
                     else:
                         PARKED.remove(CARD)
-                        CARD.balance = CARD.balance - payment
+                        #CARD.balance = CARD.balance - payment
+                        deductCardBalance(REGISTERED_CARDS, CARD, payment)
                         displayLCD("Paid P{payment}","Balance: P"+str(CARD.balance))
                         print('OFF PARKING AT '+time)
                         openGate()
@@ -77,7 +82,8 @@ def onTap(PARKED, REGISTERED_CARDS, time: str,uid: str):
             else:
                 # If going to park, check balance
                 if CARD.balance >= 20: 
-                    CARD.balance = CARD.balance - 10
+                    #CARD.balance = CARD.balance - 10
+                    deductCardBalance(REGISTERED_CARDS, CARD, 10)
                     displayLCD("Paid P10","Balance: P"+str(CARD.balance))
                     CARD.time_parked = 0
                     PARKED.append(CARD)
@@ -85,8 +91,9 @@ def onTap(PARKED, REGISTERED_CARDS, time: str,uid: str):
                     openGate()
                     utime.sleep(3)
                     closeGate()
-                elif CARD.balance > 10:
-                    CARD.balance = CARD.balance - 10
+                elif CARD.balance >= 10:
+                    # CARD.balance = CARD.balance - 10
+                    deductCardBalance(REGISTERED_CARDS, CARD, 10)
                     displayLCD("Paid P10","Balance: P"+str(CARD.balance))
                     openGate()
                     utime.sleep(3)
@@ -99,7 +106,8 @@ def onTap(PARKED, REGISTERED_CARDS, time: str,uid: str):
                     displayLCD("Not enough","balance")
                 return
             return
-    REGISTERED_CARDS.append(Card(uid, 0.0))
+    REGISTERED_CARDS.append(Card(uid, '- NEW CARD -', 0.0))
+    Internet.registerCard({'uid':uid,'name':'- NEW CARD -', 'balance':0.0})
     print(f"Registered {uid}")
     displayLCD("New Card","Registered")
 def displayTime(time):
@@ -113,7 +121,9 @@ def carParked(PARKED, CARD) -> bool:
             return True
     return False
 
-def reloadCard(REGISTERED_CARDS, uid):
+def reloadCard(uid):
+    
+    global REGISTERED_CARDS
     for CARD in REGISTERED_CARDS:
         if CARD.uid == uid:
             CARD.balance = CARD.balance + 20.0
@@ -133,3 +143,43 @@ def openGate():
 
 def closeGate():
     servo.duty_ns(MID)
+    
+    
+def deductCardBalance(REGISTERED_CARDS, CARD: Card, amount: float):
+    for card in REGISTERED_CARDS:
+        if str(card.uid) == str(CARD.uid):
+            card.balance = card.balance - amount
+            data = {
+                "uid":card.uid,
+                "name":card.name,
+                "balance":card.balance
+            }
+            print('Updating data to api')
+            Internet.updateCard(data)
+            
+    
+def updateCards(REGISTERED_CARDS):
+    print('Retrieving data from api')
+    DATA = Internet.getCards()
+    CARD: Card = None
+    print('Updating cards')
+    if DATA is not None:
+        for card in DATA:
+            uid = card['uid']
+            name = card['name']
+            balance = card['balance']
+            CARD = Card(uid, name, balance)
+            REGISTERED:bool = False
+            for REGISTERED_CARD in REGISTERED_CARDS:
+                if str(REGISTERED_CARD.uid) == str(CARD.uid):
+                    REGISTERED = True
+                    if float(REGISTERED_CARD.balance) != float(CARD.balance):
+                        REGISTERED_CARD.balance = CARD.balance
+                        print(f"changed balance {CARD.balance} - {CARD.name}")
+                        break
+            if not REGISTERED:
+                print(f"registered {CARD.uid} - {CARD.name}")
+                print(f"card length {len(REGISTERED_CARDS)}")
+                REGISTERED_CARDS.append(CARD)
+                
+            

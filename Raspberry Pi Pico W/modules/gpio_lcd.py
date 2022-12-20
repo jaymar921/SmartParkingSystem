@@ -1,6 +1,6 @@
 """Implements a HD44780 character LCD connected via ESP32 GPIO pins."""
 
-from lcd_api import LcdApi
+from modules.lcd_api import LcdApi
 from machine import Pin
 from utime import sleep_ms, sleep_us
 
