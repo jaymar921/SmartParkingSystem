@@ -11,9 +11,9 @@ function connectAPI(){
         return;
     fetch(API_INPUT.value, { 
             headers:{
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin" : "*"
             },
-            mode: 'no-cors',
             method:'GET'
         }).then( response =>{
         API_INPUT.disabled = true;
@@ -32,7 +32,8 @@ async function APISessionStart(){
     try{
         const response = await fetch(`${API_INPUT.value}api/cards`, {
             headers:{
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin" : "*"
             },
             method:'GET'
         });
@@ -60,6 +61,7 @@ async function updateCard(){
         {   method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin" : "*"
             },
             body: JSON.stringify({
                 balance, name, uid
@@ -118,6 +120,10 @@ function addCardToList(uid, name, balance){
     // check if child already has the same content
     if(document.querySelector(`#UID${uid}`) == null)
         ROW_DIV.appendChild(COLUMN_DIV_ELEMENT);
+    // update balance
+    BAL_DIV = document.querySelector(`#UID${uid}BALANCE`)
+    if (BAL_DIV.innerHTML != `Balance: <b>₱${formatToCurrency(Number.parseFloat(balance))}</b>`)
+        BAL_DIV.innerHTML = `Balance: <b>₱${formatToCurrency(Number.parseFloat(balance))}</b>`;
 }
 
 function updateCardFromList(uid, name, balance){
@@ -131,6 +137,7 @@ async function deleteCard(){
     {   method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin" : "*"
         },
         body: JSON.stringify({
             uid
