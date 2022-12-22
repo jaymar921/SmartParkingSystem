@@ -11,13 +11,13 @@ Members:
     <b>Trisha Ann Cempron</b>&nbsp;&nbsp;(Assistant)<kbd><img width="64" height="64"  src="https://avatars.githubusercontent.com/u/69587526?s=64&v=4"></kbd>&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 <p align="left">
-    <kbd><img width="64" height="64"  src="https://via.placeholder.com/64x64"></kbd>&nbsp;&nbsp;&nbsp;&nbsp;<b>Kevin Ribo</b>&nbsp;&nbsp;
+    <kbd><img width="64" height="64"  src="https://picsum.photos/200"></kbd>&nbsp;&nbsp;&nbsp;&nbsp;<b>Kevin Ribo</b>&nbsp;&nbsp;
 </p>
 <p align="right">
-    <b>Prince Martin Sierra</b>&nbsp;&nbsp;<kbd><img width="64" height="64"  src="https://via.placeholder.com/64x64"></kbd>&nbsp;&nbsp;&nbsp;&nbsp;
+    <b>Prince Martin Sierra</b>&nbsp;&nbsp;<kbd><img width="64" height="64"  src="https://picsum.photos/200"></kbd>&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 <p align="left">
-    <kbd><img width="64" height="64"  src="https://via.placeholder.com/64x64"></kbd>&nbsp;&nbsp;&nbsp;&nbsp;<b>Haven Louiam Amaya</b>&nbsp;&nbsp;
+    <kbd><img width="64" height="64"  src="https://picsum.photos/200"></kbd>&nbsp;&nbsp;&nbsp;&nbsp;<b>Haven Louiam Amaya</b>&nbsp;&nbsp;
 </p>
 
 <hr>
@@ -29,7 +29,8 @@ Members:
 </ul>
 <p>Documentations: <br> 
 <br>
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/JTUYkeMagzQ&t/0.jpg)](https://www.youtube.com/watch?v=JTUYkeMagzQ&t)
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Di031UXKi4M/0.jpg)](https://www.youtube.com/watch?v=Di031UXKi4M)
 
 </p>
 
